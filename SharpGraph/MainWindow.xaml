@@ -1,0 +1,36 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="SharpGraph.MainWindow"
+        Title="ShapGraph" WindowStyle="ThreeDBorderWindow"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Row="0" Grid.Column="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Save" Command="{Binding MainCommands.Save}" />
+                <Separator />
+                <MenuItem Header="//TODO"/>
+            </MenuItem>
+            <MenuItem Header="Tracking">
+                <MenuItem Header="Start" Command="{Binding MainCommands.Start}" />
+                <MenuItem Header="Stop" Command="{Binding MainCommands.Stop}" />
+            </MenuItem>
+            <MenuItem Header="Settings">
+                <Separator />
+                <MenuItem Header="//TODO"/>
+            </MenuItem>
+        </Menu>
+        <Image Name="PaintZone" Grid.Row="1" Grid.Column="0" Source="{Binding PaintZoneImage}" >
+            <Image.Effect>
+                <BlurEffect RenderingBias="Quality" Radius="3"/>
+            </Image.Effect>
+        </Image>
+    </Grid>
+</Window>
