@@ -38,6 +38,15 @@ namespace SharpGraph
         public event OnMouseMooveHandler OnMouseMoove;
         public event OnMouseStillHandler OnMouseStill;
 
+        private bool isTracking;
+        public bool IsTracking
+        {
+            get
+            {
+                return this.isTracking;
+            } 
+        }
+
         private Point oldPosition;
 
         public MouseTracker()
@@ -45,6 +54,7 @@ namespace SharpGraph
             this.timer = new DispatcherTimer(DispatcherPriority.Send);
             this.timer.Tick += new EventHandler(this.OnTimerTick);
             this.timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            this.isTracking = false;
         }
 
         private void OnTimerTick(object sender, EventArgs e)
@@ -70,12 +80,14 @@ namespace SharpGraph
         public void Start()
         {
             this.oldPosition = MouseTracker.GetMousePosition();
+            this.isTracking = true;
             this.timer.Start();
         }
 
         public void Stop()
         {
             this.timer.Stop();
+            this.isTracking = false;
         }
     }
 }

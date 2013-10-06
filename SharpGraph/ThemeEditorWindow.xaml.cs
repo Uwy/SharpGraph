@@ -10,19 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SharpGraph
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour Window1.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ThemeEditorWindow : Window
     {
-        public MainWindow()
+        public ThemeEditorWindow(Theme current)
         {
-            this.DataContext = new MainViewModel();
+            this.DataContext = new ThemeEditorViewModel(current);
             this.InitializeComponent();
         }
     }

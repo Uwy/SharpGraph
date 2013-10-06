@@ -58,6 +58,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ColorEditorViewModel.cs" />
+    <Compile Include="DrawStyles.cs" />
+    <Compile Include="Painter.cs" />
+    <Compile Include="Theme.cs" />
+    <Compile Include="ThemeEditorModel.cs" />
+    <Compile Include="ThemeEditorViewModel.cs" />
+    <Compile Include="ThemeEditorWindow.xaml.cs">
+      <DependentUpon>ThemeEditorWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,16 +77,20 @@
     </Compile>
     <Compile Include="Command.cs" />
     <Compile Include="MainCommands.cs" />
-    <Compile Include="SaveImageModel.cs" />
     <Compile Include="MouseTracker.cs" />
     <Compile Include="PaintZoneModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Gradient.cs" />
+    <Compile Include="SaveImageModel.cs" />
     <Compile Include="SharpGraphExtensions.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ThemeEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -61,6 +61,11 @@ namespace SharpGraph
             return (byte)(startValue + percent.ThrowIfNotPercentage() * (endValue - startValue));
         }
 
+        public static int ValueAtPercentWayToEnd(this int startValue, double percent, int endValue)
+        {
+            return (int)(startValue + percent.ThrowIfNotPercentage() * (endValue - startValue));
+        }
+
         public static int Round(this double value)
         {
             return (int)Math.Round(value);
@@ -74,6 +79,26 @@ namespace SharpGraph
         public static bool ReturnFalse<T>(this T weDontCareAboutThis)
         {
             return false;
+        }
+
+        public static char[] Replace(this char[] source, char[] oldChars, char newChar)
+        {
+            var replaced = new string(source);
+            foreach (char oldChar in oldChars)
+            {
+                replaced = replaced.Replace(oldChar, newChar);
+            }
+            return replaced.ToCharArray(); 
+        }
+
+        public static string Replace(this string source, char[] oldChars, char newChar)
+        {
+            return new string(source.ToCharArray().Replace(oldChars, newChar));
+        }
+
+        public static Rect CenteredSquare(this Point position, int radius)
+        {
+            return new Rect(position.X - radius / 2, position.Y - radius / 2, radius, radius);
         }
     }
 }

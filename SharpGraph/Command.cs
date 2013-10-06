@@ -11,6 +11,7 @@ namespace SharpGraph
     {
         private readonly Predicate<object> canExecute;
         private readonly Action<object> action;
+
         #region ICommand
         public bool CanExecute(object parameter)
         {
@@ -23,21 +24,23 @@ namespace SharpGraph
         {
             this.action(parameter);
         }
-
         #endregion
 
         public Command(Action<object> action, Predicate<object> canExecute)
         {
-            this.action = action.ThrowIfNull();
-            this.canExecute = canExecute.ThrowIfNull();
+            this.action = action.ThrowIfNull("Command : action null");
+            this.canExecute = canExecute.ThrowIfNull("Command : canExecute null");
         }
 
-        public Command(Action<object> action) : this(action, Command.CanAlwaysExecute())
-        {}
-
-        public static Predicate<object> CanAlwaysExecute()
+        public void RaiseCanExecuteChanged()
         {
-            return new Predicate<object>(SharpGraphExtensions.ReturnTrue);
+            if (this.CanExecuteChanged != null)
+            {
+                this.CanExecuteChanged(this, EventArgs.Empty);
+            }
         }
+
+        public Command(Action<object> action) : this(action, new Predicate<object>(SharpGraphExtensions.ReturnTrue))
+        {}
     }
 }

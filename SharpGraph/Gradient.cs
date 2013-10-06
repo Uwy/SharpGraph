@@ -8,9 +8,24 @@ using System.Windows.Media;
 namespace SharpGraph
 {
 
-    public class Gradient
+    public class Gradient : ICloneable
     {
+        #region ICloneable
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+        #endregion
+
         private readonly List<Color> colorsSrc;
+
+        public IEnumerable<Color> ColorsSrc
+        {
+            get
+            {
+                return this.colorsSrc;
+            }
+        }
 
         public Gradient(IEnumerable<Color> colorSrc)
         {
@@ -23,8 +38,7 @@ namespace SharpGraph
 
         public Gradient(Color color)
             : this(new[] { color, color })
-        {
-        }
+        { }
 
         public Color GetColor(double percentValue)
         {

@@ -14,8 +14,21 @@ namespace SharpGraph
     {
         private readonly WriteableBitmap paintZoneData;
         private readonly MouseTracker tracker;
+        private Theme theme;
         private int stillCounter;
-        private Gradient colors;
+
+        public Theme Theme
+        {
+            get
+            {
+                return this.theme;
+            }
+            set
+            {
+                this.theme = value;
+            }
+
+        }
 
         public BitmapSource PaintZoneData
         {
@@ -25,64 +38,57 @@ namespace SharpGraph
             }
         }
 
+        public bool IsTracking
+        {
+            get
+            {
+                return this.tracker.IsTracking;
+            }
+        }
 
         public PaintZoneModel(double width, double height)
         {
+            this.theme = Theme.Default();
             this.paintZoneData = BitmapFactory.New(width.Round(), height.Round());
-            this.FillImage(Colors.Transparent);
-            this.colors = new Gradient(Colors.Black);
             this.tracker = new MouseTracker();
-            this.stillCounter = 0;
             this.tracker.OnMouseMoove += new MouseTracker.OnMouseMooveHandler(this.HandleMouseMoove);
             this.tracker.OnMouseStill += new MouseTracker.OnMouseStillHandler(this.HandleMouseStill);
-            this.tracker.Start();
+            this.stillCounter = 0;
+            this.ResetImage();
         }
 
         public PaintZoneModel() : this(System.Windows.SystemParameters.WorkArea.Width, System.Windows.SystemParameters.WorkArea.Height)
         {}
-
-        private void DrawLine(Tuple<Point, Point> drawInformation)
-        {
-            this.DrawLine(drawInformation.Item1, drawInformation.Item2);        
-        }
-
-        private void DrawLine(Point start, Point stop)
-        {
-            //this.paintZoneData.DrawLine(start.X.Round() + 10, start.Y.Round() + 10, stop.X.Round() + 10, stop.Y.Round() + 10, this.colors.GetColor(0));
-            this.paintZoneData.DrawLineAa(start.X.Round(), start.Y.Round(), stop.X.Round(), stop.Y.Round(), this.colors.GetColor(0.5));
-            //this.paintZoneData.DrawLineBresenham(start.X.Round() - 10, start.Y.Round() - 10, stop.X.Round() - 10, stop.Y.Round() - 10, this.colors.GetColor(1));
-            //this.paintZoneData.DrawLineDDA(start.X.Round(), start.Y.Round(), stop.X.Round(), stop.Y.Round(), this.colors.GetColor(0));
-        }
-
-        private void FillEllipse(Point start)
-        {
-            //TODO
-            this.paintZoneData.FillEllipseCentered(start.X.Round(), start.Y.Round(), Math.Sqrt(this.stillCounter * 4).Round(), Math.Sqrt(this.stillCounter * 4).Round(), this.colors.GetColor(0.5));
-        }
-
-        private void FillImage(Color color)
-        {
-            this.paintZoneData.FillRectangle(0, 0, this.paintZoneData.PixelWidth, this.paintZoneData.PixelHeight, color);
-        }
 
         private void HandleMouseStill(Point waitPoint)
         {
             this.stillCounter++;
         }
 
-
-
         private void HandleMouseMoove(Point oldPosition, Point currentPosition)
         {
             if (this.stillCounter != 0)
             {
-                this.FillEllipse(oldPosition);
+                this.theme.DrawMouseStop(this.paintZoneData, oldPosition, this.stillCounter);
                 this.stillCounter = 0;
             }
-            this.DrawLine(oldPosition, currentPosition);
+            this.theme.DrawMousePath(this.paintZoneData, oldPosition, currentPosition);
         }
 
+        public void ResetImage()
+        {
+            Painter.FillImage(this.paintZoneData, Colors.Transparent);
+        }
 
+        public void StartTracking()
+        {
+            this.tracker.Start();
+        }
+
+        public void StopTracking()
+        {
+            this.tracker.Stop();
+        }
 
     }
 }
