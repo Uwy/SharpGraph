@@ -52,42 +52,60 @@
       <HintPath>WriteableBitmapEx_v1.0.8.0\WPF\WriteableBitmapEx.Wpf.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>ExtendedWPFToolkit_Binaries\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ColorEditorViewModel.cs" />
-    <Compile Include="DrawStyles.cs" />
-    <Compile Include="Painter.cs" />
-    <Compile Include="Theme.cs" />
-    <Compile Include="ThemeEditorModel.cs" />
-    <Compile Include="ThemeEditorViewModel.cs" />
-    <Compile Include="ThemeEditorWindow.xaml.cs">
-      <DependentUpon>ThemeEditorWindow.xaml</DependentUpon>
+    <Compile Include="Extensions\ImageExtensions.cs" />
+    <Compile Include="Extensions\TupleExtensions.cs" />
+    <Compile Include="Models\DrawStyles.cs" />
+    <Compile Include="Extensions\CollectionsExtensions.cs" />
+    <Compile Include="Extensions\GenericExtensions.cs" />
+    <Compile Include="Extensions\GeometricExtensions.cs" />
+    <Compile Include="Extensions\NumericExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Functions\Predicates.cs" />
+    <Compile Include="Models\PaintZone.cs" />
+    <Compile Include="Models\SaveImage.cs" />
+    <Compile Include="Models\Theme.cs" />
+    <Compile Include="Models\Painter.cs" />
+    <Compile Include="UserControls\ColorEditor\ColorEditor.xaml.cs">
+      <DependentUpon>ColorEditor.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="UserControls\ColorEditor\ColorEditorCommands.cs" />
+    <Compile Include="UserControls\ColorEditor\ColorEditorViewModel.cs" />
+    <Compile Include="Windows\MainWindow\MainCommands.cs" />
+    <Compile Include="Windows\MainWindow\MainViewModel.cs" />
+    <Compile Include="Windows\MainWindow\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ThemeEditor\ThemeEditor.xaml.cs">
+      <DependentUpon>ThemeEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ThemeEditor\ThemeEditorCommands.cs" />
+    <Compile Include="Windows\ThemeEditor\ThemeEditorViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Command.cs" />
-    <Compile Include="MainCommands.cs" />
-    <Compile Include="MouseTracker.cs" />
-    <Compile Include="PaintZoneModel.cs" />
-    <Compile Include="MainViewModel.cs" />
-    <Compile Include="Gradient.cs" />
-    <Compile Include="SaveImageModel.cs" />
-    <Compile Include="SharpGraphExtensions.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="ThemeEditorWindow.xaml">
+    <Compile Include="ViewModelUtilities\Command.cs" />
+    <Compile Include="Models\MouseTracker.cs" />
+    <Compile Include="Models\Gradient.cs" />
+    <Page Include="UserControls\ColorEditor\ColorEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainWindow\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ThemeEditor\ThemeEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,79 @@
+﻿<Window x:Class="SharpGraph.Windows.ThemeEditor.ThemeEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:SharpGraph.UserControls.ColorEditor"
+        Title="ThemeEditor" SizeToContent="WidthAndHeight"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        x:Name="ThemeEditorWindow">
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ItemsControl Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Colors}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:ColorEditor></local:ColorEditor>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="Radius size factor : "></Label>
+                <xctk:DoubleUpDown Increment="0.1" Minimum="0" Grid.Row="0" Grid.Column="1" Value="{Binding RadiusFactor}"></xctk:DoubleUpDown>
+                <Label Grid.Row="0" Grid.Column="2" Content="Color quantum : "></Label>
+                <xctk:DoubleUpDown Increment="0.1" Minimum="0" Grid.Row="0" Grid.Column="3" Value="{Binding QuantumColor}"></xctk:DoubleUpDown>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="Radius evolution :"></Label>
+                <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding RadiusStyle}" ItemsSource="{Binding RadiusStyles}"></ComboBox>
+                <Label Grid.Row="0" Grid.Column="2" Content="Stop style :"></Label>
+                <ComboBox Grid.Column="3" Grid.Row="0" SelectedItem="{Binding StopStyle}" ItemsSource="{Binding StopStyles}"></ComboBox>
+                <Label Grid.Row="0" Grid.Column="4" Content="Path style :"></Label>
+                <ComboBox Grid.Row="0" Grid.Column="5" SelectedItem="{Binding PathStyle}" ItemsSource="{Binding PathStyles}"></ComboBox>
+                <Label Grid.Row="0" Grid.Column="6" Content="Color path evolution :"></Label>
+                <ComboBox Grid.Row="0" Grid.Column="7" SelectedItem="{Binding ColorStyle}" ItemsSource="{Binding ColorStyles}"></ComboBox>
+            </Grid>
+
+        </Grid>
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Ok" Command="{Binding Commands.Ok}" CommandParameter="{Binding ElementName=ThemeEditorWindow}"></Button>
+            <Button Content="Save" Command="{Binding Commands.Save}"></Button>
+            <Button Content="Cancel" Command="{Binding Commands.Cancel}" CommandParameter="{Binding ElementName=ThemeEditorWindow}"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
